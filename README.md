@@ -5,15 +5,12 @@ simple react native component
 ## Installation
 
 ```sh
-npm install react-native-trivium
+yarn add react-native-trivium
 ```
 
 ## Usage
 
 ```js
-import Brand, { ListTv } from 'react-native-trivium';
-
-// ...
 
 import * as React from 'react';
 
