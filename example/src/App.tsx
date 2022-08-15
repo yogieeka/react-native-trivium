@@ -1,34 +1,27 @@
-import * as React from 'react';
+import 'react-native-gesture-handler';
+import React from 'react';
+import { Provider } from 'react-redux';
+import { PersistGate } from 'redux-persist/lib/integration/react';
+// import { store, persistor } from '@/Store'
+// import ApplicationNavigator from '@/Navigators/Application'
+// import './Translations';
+// import { persistor, store } from '@/src/Store';
+import ApplicationNavigator from './Navigators/Application';
+import { persistor, store } from 'react-native-trivium';
 
-import { StyleSheet, View } from 'react-native';
-import Brand, { ListTv } from 'react-native-trivium';
+const App = () => (
+  <Provider store={store}>
+    {/**
+     * PersistGate delays the rendering of the app's UI until the persisted state has been retrieved
+     * and saved to redux.
+     * The `loading` prop can be `null` or any react instance to show during loading (e.g. a splash screen),
+     * for example `loading={<SplashScreen />}`.
+     * @see https://github.com/rt2zz/redux-persist/blob/master/docs/PersistGate.md
+     */}
+    <PersistGate loading={null} persistor={persistor}>
+      <ApplicationNavigator />
+    </PersistGate>
+  </Provider>
+);
 
-export default function App() {
-  return (
-    <View style={styles.container}>
-      <View
-        style={{
-          marginTop: 100,
-          justifyContent: 'center',
-          alignContent: 'flex-end',
-        }}
-      >
-        <Brand />
-        <ListTv />
-      </View>
-    </View>
-  );
-}
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    backgroundColor: 'white',
-  },
-  box: {
-    width: 60,
-    height: 60,
-    marginVertical: 20,
-  },
-});
+export default App;

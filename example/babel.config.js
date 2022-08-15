@@ -1,17 +1,21 @@
-const path = require('path');
-const pak = require('../package.json');
+const presets = ['module:metro-react-native-babel-preset']
+const plugins = []
+
+plugins.push(
+  [
+    'module-resolver',
+    {
+      root: ['./src'],
+      extensions: ['.js', '.json'],
+      alias: {
+        '@': './src',
+      },
+    },
+  ],
+  'react-native-reanimated/plugin',
+)
 
 module.exports = {
-  presets: ['module:metro-react-native-babel-preset'],
-  plugins: [
-    [
-      'module-resolver',
-      {
-        extensions: ['.tsx', '.ts', '.js', '.json'],
-        alias: {
-          [pak.name]: path.join(__dirname, '..', pak.source),
-        },
-      },
-    ],
-  ],
-};
+  presets,
+  plugins,
+}
